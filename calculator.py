@@ -5,6 +5,8 @@ import math
 from PyQt6 import QtCore, QtWidgets, QtGui, uic
 from BlurWindow.blurWindow import blur
 
+from constants import UI_DIR
+
 class Calculator(QtWidgets.QMainWindow):
 
     textChanged = QtCore.pyqtSignal()   #Custom signal to detect changes on label
@@ -13,7 +15,7 @@ class Calculator(QtWidgets.QMainWindow):
 
         super(Calculator, self).__init__()
 
-        uic.loadUi(os.path.join(os.getcwd(), "ui\\calculator.ui"), self)
+        uic.loadUi(os.path.join(UI_DIR, "calculator.ui"), self)
 
         self.setWindowFlags(QtCore.Qt.WindowType.FramelessWindowHint)  #PyQt5 QtCore.Qt.FramelessWindowHint
         self.setAttribute(QtCore.Qt.WidgetAttribute.WA_TranslucentBackground)   #PyQt5 QtCore.Qt.WA_TranslucentBackground
@@ -79,7 +81,7 @@ class Calculator(QtWidgets.QMainWindow):
 
         self.animation = QtCore.QPropertyAnimation(self.leftMenuBar, b"minimumWidth")
 
-        self.menuBar.mousePressEvent = self.dragWindow
+        self.windowBar.mousePressEvent = self.dragWindow
 
     def dragWindow(self, event):
         
