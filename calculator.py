@@ -39,38 +39,38 @@ class Calculator(QtWidgets.QMainWindow):
         self.openingMenu = False
         #*********************
         
-        self.pushButton_menu.clicked.connect(self.animatedMenu)
+        self.btnMenu.clicked.connect(self.animatedMenu)
 
-        self.pushButton_0.clicked.connect(self.btnPressed)
-        self.pushButton_1.clicked.connect(self.btnPressed)
-        self.pushButton_2.clicked.connect(self.btnPressed)
-        self.pushButton_3.clicked.connect(self.btnPressed)
-        self.pushButton_4.clicked.connect(self.btnPressed)
-        self.pushButton_5.clicked.connect(self.btnPressed)
-        self.pushButton_6.clicked.connect(self.btnPressed)
-        self.pushButton_7.clicked.connect(self.btnPressed)
-        self.pushButton_8.clicked.connect(self.btnPressed)
-        self.pushButton_9.clicked.connect(self.btnPressed)
+        self.btn_0.clicked.connect(self.btnClicked)
+        self.btn_1.clicked.connect(self.btnClicked)
+        self.btn_2.clicked.connect(self.btnClicked)
+        self.btn_3.clicked.connect(self.btnClicked)
+        self.btn_4.clicked.connect(self.btnClicked)
+        self.btn_5.clicked.connect(self.btnClicked)
+        self.btn_6.clicked.connect(self.btnClicked)
+        self.btn_7.clicked.connect(self.btnClicked)
+        self.btn_8.clicked.connect(self.btnClicked)
+        self.btn_9.clicked.connect(self.btnClicked)
         
-        self.pushButton_plusMinus.clicked.connect(self.btnPressed)
-        self.pushButton_percent.clicked.connect(self.btnPressed)
-        self.pushButton_add.clicked.connect(self.btnPressed)
-        self.pushButton_sub.clicked.connect(self.btnPressed)
-        self.pushButton_mul.clicked.connect(self.btnPressed)
-        self.pushButton_div.clicked.connect(self.btnPressed)
-        self.pushButton_eq.clicked.connect(self.btnPressed)
+        self.btnPlusMinus.clicked.connect(self.btnClicked)
+        self.btnPercent.clicked.connect(self.btnClicked)
+        self.btnAdd.clicked.connect(self.btnClicked)
+        self.btnSub.clicked.connect(self.btnClicked)
+        self.btnMul.clicked.connect(self.btnClicked)
+        self.btnDiv.clicked.connect(self.btnClicked)
+        self.btnEq.clicked.connect(self.btnClicked)
 
-        self.pushButton_oneDivX.clicked.connect(self.btnPressed)
-        self.pushButton_pow.clicked.connect(self.btnPressed)
-        self.pushButton_sqrt.clicked.connect(self.btnPressed)
+        self.btnOneDivX.clicked.connect(self.btnClicked)
+        self.btnPow.clicked.connect(self.btnClicked)
+        self.btnSqrt.clicked.connect(self.btnClicked)
         
-        self.pushButton_del.clicked.connect(self.btnPressed)
-        self.pushButton_dot.clicked.connect(self.btnPressed)
-        self.pushButton_c.clicked.connect(self.btnPressed)
-        self.pushButton_ce.clicked.connect(self.btnPressed)
+        self.btnDel.clicked.connect(self.btnClicked)
+        self.btnDot.clicked.connect(self.btnClicked)
+        self.btnC.clicked.connect(self.btnClicked)
+        self.btnCe.clicked.connect(self.btnClicked)
         
-        self.pushButton_close.clicked.connect(self.btnClosePressed)
-        self.pushButton_minimize.clicked.connect(self.btnMinimizePressed)
+        self.btnClose.clicked.connect(self.btnClosePressed)
+        self.btnMinimize.clicked.connect(self.btnMinimizePressed)
 
         self.textChanged.connect(self.checkLabel)   #Custom signal connect
         
@@ -138,7 +138,7 @@ class Calculator(QtWidgets.QMainWindow):
         
         self.animation.start()
 
-    def btnPressed(self):
+    def btnClicked(self):
         
         btn = self.sender()
 
@@ -157,7 +157,6 @@ class Calculator(QtWidgets.QMainWindow):
                 self.label.setText("0" + btn.text())
 
             else:
-                
                 self.label.setText(self.label.text() + btn.text())
         
         #*** Set Numbers ***
@@ -169,7 +168,6 @@ class Calculator(QtWidgets.QMainWindow):
                 self.clearScreen = False
             
             if self.label.text() == "0":
-
                 self.label.setText(btn.text())
 
             else:
@@ -178,15 +176,12 @@ class Calculator(QtWidgets.QMainWindow):
 
         #*** Operations ***
         elif btn.text() in unaryOp:
-
             self.unaryOperation(btn.text())
         
         elif btn.text() in binaryOp:
-
             self.binaryOperation(btn.text())
         
         elif btn.text() == "=":
-            
             self.getResult()
 
         else:
@@ -207,27 +202,31 @@ class Calculator(QtWidgets.QMainWindow):
             if self.label.text() != "0":
 
                 value = float(self.label.text())
-
                 value *= -1
 
                 self.label.setText(format(value, ".15g"))
 
         elif op == "%":
+            
+            try:
+                if self.label.text() != "0":
 
-            if self.label.text() != "0":
+                    value = float(self.label.text())
+                    value *= 0.01
 
-                value = float(self.label.text())
+                    self.label.setText(format(value, ".15g"))
 
-                value *= 0.01
-
-                self.label.setText(format(value, ".15g"))
+                    if not self.clearScreen:
+                        self.clearScreen = True
+            
+            except ValueError:
+                pass
 
         elif op == "pow(x,2)":
 
             if self.label.text() != "0":
 
                 value = float(self.label.text())
-
                 value = math.pow(value, 2)
 
                 self.label.setText(format(value, ".15g"))
@@ -237,26 +236,29 @@ class Calculator(QtWidgets.QMainWindow):
             if self.label.text() != "0":
 
                 value = float(self.label.text())
-
                 value = math.sqrt(value)
 
                 self.label.setText(format(value, ".15g"))
 
         else:
+            
+            try:
 
-            if self.label.text() != "0":
+                if self.label.text() != "0":
 
-                value = float(self.label.text())
+                    value = float(self.label.text())
+                    value = 1/value
 
-                value = 1/value
+                    self.label.setText(format(value, ".15g"))
 
-                self.label.setText(format(value, ".15g"))
+                else:
 
-            else:
-
-                self.label.setText("Can't Divide by Zero!")
-                self.clearScreen = True
-                self.result = 0
+                    self.label.setText("Can't Divide by Zero!")
+                    self.clearScreen = True
+                    self.result = 0
+            
+            except ValueError:
+                pass
             
     def binaryOperation(self, op):
 
