@@ -1,3 +1,4 @@
+from multiprocessing.sharedctypes import Value
 import os
 import sys
 import math
@@ -5,7 +6,7 @@ import math
 from PyQt6 import QtCore, QtWidgets, QtGui, uic
 from BlurWindow.blurWindow import blur
 
-from constants import UI_DIR
+from constants import UI_DIR, STYLE_SHEET
 
 class Calculator(QtWidgets.QMainWindow):
 
@@ -19,6 +20,8 @@ class Calculator(QtWidgets.QMainWindow):
 
         self.setWindowFlags(QtCore.Qt.WindowType.FramelessWindowHint)  #PyQt5 QtCore.Qt.FramelessWindowHint
         self.setAttribute(QtCore.Qt.WidgetAttribute.WA_TranslucentBackground)   #PyQt5 QtCore.Qt.WA_TranslucentBackground
+        self.setStyleSheet(STYLE_SHEET)
+
         QtWidgets.QSizeGrip(self.sizeGrip)
 
         blur(self.winId())
@@ -69,7 +72,6 @@ class Calculator(QtWidgets.QMainWindow):
         self.btnDel.clicked.connect(self.btnClicked)
         self.btnDot.clicked.connect(self.btnClicked)
         self.btnC.clicked.connect(self.btnClicked)
-        self.btnCe.clicked.connect(self.btnClicked)
         
         self.btnClose.clicked.connect(self.btnClosePressed)
         self.btnMinimize.clicked.connect(self.btnMinimizePressed)
@@ -156,25 +158,25 @@ class Calculator(QtWidgets.QMainWindow):
             if self.clearScreen:
                 
                 self.clearScreen = False
-                self.label.setText("0" + btn.text())
+                self.labelResult.setText("0" + btn.text())
 
             else:
-                self.label.setText(self.label.text() + btn.text())
+                self.labelResult.setText(self.labelResult.text() + btn.text())
         
         #*** Set Numbers ***
         if btn.text() in numbers:
 
             if self.clearScreen:
 
-                self.label.setText("0")
+                self.labelResult.setText("0")
                 self.clearScreen = False
             
-            if self.label.text() == "0":
-                self.label.setText(btn.text())
+            if self.labelResult.text() == "0":
+                self.labelResult.setText(btn.text())
 
             else:
 
-                self.label.setText(self.label.text() + btn.text())
+                self.labelResult.setText(self.labelResult.text() + btn.text())
 
         #*** Operations ***
         elif btn.text() in unaryOp:
@@ -190,7 +192,7 @@ class Calculator(QtWidgets.QMainWindow):
             
             if self.clearScreen:
 
-                self.label.setText("0")
+                self.labelResult.setText("0")
                 self.clearScreen = False
                 
             self.clearDelete(btn.text())
@@ -199,129 +201,126 @@ class Calculator(QtWidgets.QMainWindow):
 
     def unaryOperation(self, op):
         
-        if op == "+/-":
-            
-            if self.label.text() != "0":
+        try:
 
-                value = float(self.label.text())
-                value *= -1
+            if op == "+/-":
+                
+                if self.labelResult.text() != "0":
 
-                self.label.setText(format(value, ".15g"))
+                    value = float(self.labelResult.text())
+                    value *= -1
 
-        elif op == "%":
-            
-            try:
-                if self.label.text() != "0":
+                    self.labelResult.setText(format(value, ".15g"))
 
-                    value = float(self.label.text())
-                    value *= 0.01
+            elif op == "%":
+                
+                    if self.labelResult.text() != "0":
 
-                    self.label.setText(format(value, ".15g"))
+                        value = float(self.labelResult.text())
+                        value *= 0.01
 
-                    if not self.clearScreen:
-                        self.clearScreen = True
-            
-            except ValueError:
-                pass
+                        self.labelResult.setText(format(value, ".15g"))
 
-        elif op == "pow(x,2)":
+                        if not self.clearScreen:
+                            self.clearScreen = True
 
-            if self.label.text() != "0":
+            elif op == "pow(x,2)":
 
-                value = float(self.label.text())
-                value = math.pow(value, 2)
+                if self.labelResult.text() != "0":
 
-                self.label.setText(format(value, ".15g"))
+                    value = float(self.labelResult.text())
+                    value = math.pow(value, 2)
 
-        elif op == "sqrt(x)":
+                    self.labelResult.setText(format(value, ".15g"))
 
-            if self.label.text() != "0":
+            elif op == "sqrt(x)":
 
-                value = float(self.label.text())
-                value = math.sqrt(value)
+                if self.labelResult.text() != "0":
 
-                self.label.setText(format(value, ".15g"))
+                    value = float(self.labelResult.text())
+                    value = math.sqrt(value)
 
-        else:
-            
-            try:
+                    self.labelResult.setText(format(value, ".15g"))
 
-                if self.label.text() != "0":
+            else:
 
-                    value = float(self.label.text())
+                if self.labelResult.text() != "0":
+
+                    value = float(self.labelResult.text())
                     value = 1/value
 
-                    self.label.setText(format(value, ".15g"))
+                    self.labelResult.setText(format(value, ".15g"))
 
                 else:
 
-                    self.label.setText("Can't Divide by Zero!")
+                    self.labelResult.setText("Can't Divide by Zero!")
                     self.clearScreen = True
                     self.result = 0
-            
-            except ValueError:
-                pass
-            
+        
+        except ValueError:
+            pass
+
     def binaryOperation(self, op):
 
-        #*** Operations ***
-        if op == "+":
+        #*** Binary Operations ***
+
+        try:
+
+            if op == "+":
+                
+                self.prevOperation = "add"
+                self.result += float(self.labelResult.text())
+                self.labelResult.setText("0")
             
-            self.prevOperation = "add"
-            self.result += float(self.label.text())
-            self.label.setText("0")
-        
-        elif op == "-":
+            elif op == "-":
+                
+                self.prevOperation = "sub"
+                self.result += float(self.labelResult.text())
+                self.labelResult.setText("0")
             
-            self.prevOperation = "sub"
-            self.result += float(self.label.text())
-            self.label.setText("0")
+            elif op == "X" :
+
+                self.prevOperation = "mul"
+                self.result += float(self.labelResult.text())
+                self.labelResult.setText("0")
+
+            else:
+
+                self.prevOperation = "div"
+                self.result += float(self.labelResult.text())
+                self.labelResult.setText("0")
         
-        elif op == "X" :
-
-            self.prevOperation = "mul"
-            self.result += float(self.label.text())
-            self.label.setText("0")
-
-        else:
-
-            self.prevOperation = "div"
-            self.result += float(self.label.text())
-            self.label.setText("0")
+        except ValueError:
+            pass
     
     def getResult(self):
 
         if self.prevOperation != "":
 
             if self.prevOperation == "add":
-
-                self.result += float(self.label.text())
+                self.result += float(self.labelResult.text())
 
             elif self.prevOperation == "sub":
-
-                self.result -= float(self.label.text())
+                self.result -= float(self.labelResult.text())
             
             elif self.prevOperation == "mul":
-                
-                self.result *= float(self.label.text())
+                self.result *= float(self.labelResult.text())
 
             else:
 
-                if self.label.text() != "0":
-                    
-                    self.result /= float(self.label.text())
+                if self.labelResult.text() != "0":
+                    self.result /= float(self.labelResult.text())
                                         
                 else:
-
                     self.result = "Can't Divide by Zero!"
 
             if isinstance(self.result, str):   #Check if result has a number or a message
 
-                self.label.setText(self.result)
+                self.labelResult.setText(self.result)
 
             else:
 
-                self.label.setText(format(self.result, ".15g"))
+                self.labelResult.setText(format(self.result, ".15g"))
             
             self.clearScreen = True
             self.result = 0
@@ -333,34 +332,37 @@ class Calculator(QtWidgets.QMainWindow):
 
             if op == "DEL":
 
-                if self.label.text() != "Can't Divide by Zero!":
+                if self.labelResult.text() != "Can't Divide by Zero!":
 
-                    if self.label.text() != "" and self.label.text() != "0" and len(self.label.text()) != 1:
+                    if self.labelResult.text() != "" and self.labelResult.text() != "0" and len(self.labelResult.text()) != 1:
                         
-                        self.label.setText(
-                            self.label.text()[:len(self.label.text()) - 1])
+                        self.labelResult.setText(
+                            self.labelResult.text()[:len(self.labelResult.text()) - 1])
 
                     else:
-
-                        self.label.setText("0")
+                        
+                        self.result = 0
+                        self.labelResult.setText("0")
                     
                 else:
 
-                    self.label.setText("0")
+                    self.result = 0
+                    self.labelResult.setText("0")
 
             elif op== "C":
 
                 self.result = 0
-                self.label.setText("0")
+                self.labelResult.setText("0")
 
             else:
-
-                self.label.setText("0")
+                
+                self.result = 0
+                self.labelResult.setText("0")
 
     @QtCore.pyqtSlot()
     def checkLabel(self):
 
-        if not "." in self.label.text() and self.decimalPoint == True:
+        if not "." in self.labelResult.text() and self.decimalPoint == True:
 
             self.decimalPoint = False
         
