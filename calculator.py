@@ -294,37 +294,42 @@ class Calculator(QtWidgets.QMainWindow):
             pass
     
     def getResult(self):
+        
+        try:
 
-        if self.prevOperation != "":
+            if self.prevOperation != "":
 
-            if self.prevOperation == "add":
-                self.result += float(self.labelResult.text())
+                if self.prevOperation == "add":
+                    self.result += float(self.labelResult.text())
 
-            elif self.prevOperation == "sub":
-                self.result -= float(self.labelResult.text())
-            
-            elif self.prevOperation == "mul":
-                self.result *= float(self.labelResult.text())
+                elif self.prevOperation == "sub":
+                    self.result -= float(self.labelResult.text())
+                
+                elif self.prevOperation == "mul":
+                    self.result *= float(self.labelResult.text())
 
-            else:
-
-                if self.labelResult.text() != "0":
-                    self.result /= float(self.labelResult.text())
-                                        
                 else:
-                    self.result = "Can't Divide by Zero!"
 
-            if isinstance(self.result, str):   #Check if result has a number or a message
+                    if self.labelResult.text() != "0":
+                        self.result /= float(self.labelResult.text())
+                                            
+                    else:
+                        self.result = "Can't Divide by Zero!"
 
-                self.labelResult.setText(self.result)
+                if isinstance(self.result, str):   #Check if result has a number or a message
 
-            else:
+                    self.labelResult.setText(self.result)
 
-                self.labelResult.setText(format(self.result, ".15g"))
-            
-            self.clearScreen = True
-            self.result = 0
-            self.prevOperation = ""
+                else:
+
+                    self.labelResult.setText(format(self.result, ".15g"))
+                
+                self.clearScreen = True
+                self.result = 0
+                self.prevOperation = ""
+
+        except ValueError:
+            pass
 
     def clearDelete(self, op):
 
