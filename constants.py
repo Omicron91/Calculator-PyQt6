@@ -1,3 +1,8 @@
+import os
+
+BASE_DIR = os.getcwd()
+UI_DIR = os.path.join(BASE_DIR, "ui")
+
 STYLE_SHEET = """
     *{
         font-family: Lucida Sans;
