@@ -12,7 +12,7 @@
 The following project aims to design and development a basic calculator by using
 python and PyQt6 as a framework
 
-[![Calculator screenshot][product-screenshot]]
+[![product-screenshot]]
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
