@@ -12,10 +12,9 @@
 The following project aims to design and development a basic calculator by using
 python and PyQt6 as a framework
 
-[![product-screenshot]]
+![Product Screen Shot][product-screenshot]
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 
 ### Built With
 
@@ -64,8 +63,6 @@ install them.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 <!-- CONTRIBUTING -->
 ## Contributing
 
@@ -82,8 +79,6 @@ Don't forget to give the project a star! Thanks again!
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 <!-- LICENSE -->
 ## License
 
@@ -91,15 +86,12 @@ Distributed under the GNU License. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 <!-- CONTACT -->
 ## Contact
 
 Etienne Cárdenas Wertheimer - etienne.cardenas@gmail.com
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [product-screenshot]: images/screenshot.png
