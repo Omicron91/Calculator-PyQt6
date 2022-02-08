@@ -20,10 +20,17 @@ class Calculator(QtWidgets.QMainWindow):
         self.setWindowFlags(QtCore.Qt.WindowType.FramelessWindowHint)  #PyQt5 QtCore.Qt.FramelessWindowHint
         self.setAttribute(QtCore.Qt.WidgetAttribute.WA_TranslucentBackground)   #PyQt5 QtCore.Qt.WA_TranslucentBackground
         self.setStyleSheet(STYLE_SHEET)
-
+        
         QtWidgets.QSizeGrip(self.sizeGrip)
 
         blur(self.winId())
+
+        for idx in range(self.comboBox.count()):
+            self.comboBox.model().item(idx).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+
+        for idx in range(self.comboBox_2.count()):
+            self.comboBox_2.model().item(idx).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+
         #*** Mouse event var ***
         self.clicked = False
         self.oldPos = QtCore.QPointF()
@@ -44,6 +51,8 @@ class Calculator(QtWidgets.QMainWindow):
         #*********************
         
         self.btnMenu.clicked.connect(self.animatedMenu)
+        self.btnStdCalc.clicked.connect(self.on_btnFromMenu_clicked)
+        self.btnSciCalc.clicked.connect(self.on_btnFromMenu_clicked)
 
         self.btn_0.clicked.connect(self.btnClicked)
         self.btn_1.clicked.connect(self.btnClicked)
@@ -140,6 +149,19 @@ class Calculator(QtWidgets.QMainWindow):
             self.animation.setEasingCurve(QtCore.QEasingCurve.Type.InCirc)
         
         self.animation.start()
+
+    def on_btnFromMenu_clicked(self):
+
+        btn = self.sender()
+        currentIdx = self.stackedWidget.currentIndex()
+
+        if "Std" in btn.objectName():
+            if currentIdx != 0:
+                self.stackedWidget.setCurrentIndex(0)
+        
+        elif "Sci" in btn.objectName():
+            if currentIdx != 1:
+                self.stackedWidget.setCurrentIndex(1)
 
     def btnClicked(self):
         
