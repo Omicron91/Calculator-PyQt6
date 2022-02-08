@@ -13,6 +13,11 @@ STYLE_SHEET = """
         font-size: 11pt;
     }
 
+    QSizeGrip
+    {
+        background-color: rgba(255, 255, 255, 128);
+    }
+
     QLabel[title]
     {
         background-color: rgba(0, 0, 0, 0);
@@ -43,8 +48,8 @@ STYLE_SHEET = """
 
     QPushButton[num]
     {
-        background-color: rgb(0, 0, 0);
-        color: rgb(255, 255, 255);
+        background-color: rgba(20, 20, 20, 255);
+        color: rgba(255, 255, 255, 255);
         font-size: 12pt;
         font-weight: bold;
     }
