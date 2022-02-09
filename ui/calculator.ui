@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>318</width>
+    <width>333</width>
     <height>630</height>
    </rect>
   </property>
@@ -168,7 +168,7 @@
           </size>
          </property>
          <property name="text">
-          <string>X</string>
+          <string>x</string>
          </property>
         </widget>
        </item>
@@ -567,7 +567,7 @@
                <number>4</number>
               </property>
               <item row="2" column="2">
-               <widget class="QPushButton" name="btnSqrt">
+               <widget class="QPushButton" name="btnSqrt_1">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -583,10 +583,13 @@
                 <property name="text">
                  <string>sqrt(x)</string>
                 </property>
+                <property name="num" stdset="0">
+                 <bool>false</bool>
+                </property>
                </widget>
               </item>
               <item row="1" column="2">
-               <widget class="QPushButton" name="btnC">
+               <widget class="QPushButton" name="btnC_1">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -602,10 +605,13 @@
                 <property name="text">
                  <string>C</string>
                 </property>
+                <property name="num" stdset="0">
+                 <bool>false</bool>
+                </property>
                </widget>
               </item>
               <item row="2" column="0">
-               <widget class="QPushButton" name="btnOneDivX">
+               <widget class="QPushButton" name="btnOneDivX_1">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -621,10 +627,13 @@
                 <property name="text">
                  <string>1/x</string>
                 </property>
+                <property name="num" stdset="0">
+                 <bool>false</bool>
+                </property>
                </widget>
               </item>
               <item row="1" column="0">
-               <widget class="QPushButton" name="btnPercent">
+               <widget class="QPushButton" name="btnPercent_1">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -640,10 +649,13 @@
                 <property name="text">
                  <string>%</string>
                 </property>
+                <property name="num" stdset="0">
+                 <bool>false</bool>
+                </property>
                </widget>
               </item>
               <item row="2" column="1">
-               <widget class="QPushButton" name="btnPow">
+               <widget class="QPushButton" name="btnPow_1">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -659,10 +671,13 @@
                 <property name="text">
                  <string>pow(x,2)</string>
                 </property>
+                <property name="num" stdset="0">
+                 <bool>false</bool>
+                </property>
                </widget>
               </item>
               <item row="6" column="0">
-               <widget class="QPushButton" name="btn_0">
+               <widget class="QPushButton" name="btn0_1">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -684,7 +699,7 @@
                </widget>
               </item>
               <item row="1" column="1">
-               <widget class="QPushButton" name="btnPlusMinus">
+               <widget class="QPushButton" name="btnPlusMinus_1">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -700,10 +715,13 @@
                 <property name="text">
                  <string>+/-</string>
                 </property>
+                <property name="num" stdset="0">
+                 <bool>false</bool>
+                </property>
                </widget>
               </item>
               <item row="6" column="1">
-               <widget class="QPushButton" name="btnDot">
+               <widget class="QPushButton" name="btnDot_1">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -719,10 +737,13 @@
                 <property name="text">
                  <string>.</string>
                 </property>
+                <property name="num" stdset="0">
+                 <bool>false</bool>
+                </property>
                </widget>
               </item>
               <item row="6" column="2">
-               <widget class="QPushButton" name="btnDel">
+               <widget class="QPushButton" name="btnDel_1">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -738,10 +759,13 @@
                 <property name="text">
                  <string>DEL</string>
                 </property>
+                <property name="num" stdset="0">
+                 <bool>false</bool>
+                </property>
                </widget>
               </item>
               <item row="1" column="3">
-               <widget class="QPushButton" name="btnDiv">
+               <widget class="QPushButton" name="btnDiv_1">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -757,10 +781,13 @@
                 <property name="text">
                  <string>/</string>
                 </property>
+                <property name="num" stdset="0">
+                 <bool>false</bool>
+                </property>
                </widget>
               </item>
               <item row="5" column="1">
-               <widget class="QPushButton" name="btn_2">
+               <widget class="QPushButton" name="btn2_1">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -782,7 +809,7 @@
                </widget>
               </item>
               <item row="5" column="0">
-               <widget class="QPushButton" name="btn_1">
+               <widget class="QPushButton" name="btn1_1">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -804,7 +831,7 @@
                </widget>
               </item>
               <item row="3" column="3">
-               <widget class="QPushButton" name="btnSub">
+               <widget class="QPushButton" name="btnSub_1">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -820,10 +847,13 @@
                 <property name="text">
                  <string>-</string>
                 </property>
+                <property name="num" stdset="0">
+                 <bool>false</bool>
+                </property>
                </widget>
               </item>
               <item row="5" column="2">
-               <widget class="QPushButton" name="btn_3">
+               <widget class="QPushButton" name="btn3_1">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -845,7 +875,7 @@
                </widget>
               </item>
               <item row="2" column="3">
-               <widget class="QPushButton" name="btnMul">
+               <widget class="QPushButton" name="btnMul_1">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -861,10 +891,13 @@
                 <property name="text">
                  <string>X</string>
                 </property>
+                <property name="num" stdset="0">
+                 <bool>false</bool>
+                </property>
                </widget>
               </item>
               <item row="5" column="3" rowspan="2">
-               <widget class="QPushButton" name="btnEq">
+               <widget class="QPushButton" name="btnEq_1">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -883,10 +916,13 @@
                 <property name="eq" stdset="0">
                  <bool>true</bool>
                 </property>
+                <property name="num" stdset="0">
+                 <bool>false</bool>
+                </property>
                </widget>
               </item>
               <item row="4" column="3">
-               <widget class="QPushButton" name="btnAdd">
+               <widget class="QPushButton" name="btnAdd_1">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -896,10 +932,13 @@
                 <property name="text">
                  <string>+</string>
                 </property>
+                <property name="num" stdset="0">
+                 <bool>false</bool>
+                </property>
                </widget>
               </item>
               <item row="4" column="1">
-               <widget class="QPushButton" name="btn_5">
+               <widget class="QPushButton" name="btn5_1">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -921,7 +960,7 @@
                </widget>
               </item>
               <item row="4" column="2">
-               <widget class="QPushButton" name="btn_6">
+               <widget class="QPushButton" name="btn6_1">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -943,7 +982,7 @@
                </widget>
               </item>
               <item row="4" column="0">
-               <widget class="QPushButton" name="btn_4">
+               <widget class="QPushButton" name="btn4_1">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -965,7 +1004,7 @@
                </widget>
               </item>
               <item row="3" column="0">
-               <widget class="QPushButton" name="btn_7">
+               <widget class="QPushButton" name="btn7_1">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -987,7 +1026,7 @@
                </widget>
               </item>
               <item row="3" column="1">
-               <widget class="QPushButton" name="btn_8">
+               <widget class="QPushButton" name="btn8_1">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -1009,7 +1048,7 @@
                </widget>
               </item>
               <item row="3" column="2">
-               <widget class="QPushButton" name="btn_9">
+               <widget class="QPushButton" name="btn9_1">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -1085,6 +1124,9 @@
                 <property name="text">
                  <string>%</string>
                 </property>
+                <property name="num" stdset="0">
+                 <bool>false</bool>
+                </property>
                </widget>
               </item>
               <item row="3" column="2">
@@ -1103,6 +1145,9 @@
                 </property>
                 <property name="text">
                  <string>C</string>
+                </property>
+                <property name="num" stdset="0">
+                 <bool>false</bool>
                 </property>
                </widget>
               </item>
@@ -1123,6 +1168,9 @@
                 <property name="text">
                  <string>DEL</string>
                 </property>
+                <property name="num" stdset="0">
+                 <bool>false</bool>
+                </property>
                </widget>
               </item>
               <item row="3" column="1">
@@ -1141,6 +1189,9 @@
                 </property>
                 <property name="text">
                  <string>+/-</string>
+                </property>
+                <property name="num" stdset="0">
+                 <bool>false</bool>
                 </property>
                </widget>
               </item>
@@ -1161,10 +1212,13 @@
                 <property name="text">
                  <string>.</string>
                 </property>
+                <property name="num" stdset="0">
+                 <bool>false</bool>
+                </property>
                </widget>
               </item>
               <item row="8" column="0">
-               <widget class="QPushButton" name="btn_19">
+               <widget class="QPushButton" name="btn0_2">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -1186,7 +1240,7 @@
                </widget>
               </item>
               <item row="7" column="0">
-               <widget class="QPushButton" name="btn_10">
+               <widget class="QPushButton" name="btn1_2">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -1208,7 +1262,7 @@
                </widget>
               </item>
               <item row="7" column="1">
-               <widget class="QPushButton" name="btn_11">
+               <widget class="QPushButton" name="btn2_3">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -1246,6 +1300,9 @@
                 <property name="text">
                  <string>-</string>
                 </property>
+                <property name="num" stdset="0">
+                 <bool>false</bool>
+                </property>
                </widget>
               </item>
               <item row="3" column="3">
@@ -1265,6 +1322,9 @@
                 <property name="text">
                  <string>/</string>
                 </property>
+                <property name="num" stdset="0">
+                 <bool>false</bool>
+                </property>
                </widget>
               </item>
               <item row="4" column="3">
@@ -1283,6 +1343,9 @@
                 </property>
                 <property name="text">
                  <string>X</string>
+                </property>
+                <property name="num" stdset="0">
+                 <bool>false</bool>
                 </property>
                </widget>
               </item>
@@ -1306,6 +1369,9 @@
                 <property name="eq" stdset="0">
                  <bool>true</bool>
                 </property>
+                <property name="num" stdset="0">
+                 <bool>false</bool>
+                </property>
                </widget>
               </item>
               <item row="6" column="3">
@@ -1325,10 +1391,13 @@
                 <property name="text">
                  <string>+</string>
                 </property>
+                <property name="num" stdset="0">
+                 <bool>false</bool>
+                </property>
                </widget>
               </item>
               <item row="7" column="2">
-               <widget class="QPushButton" name="btn_12">
+               <widget class="QPushButton" name="btn3_2">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -1350,7 +1419,7 @@
                </widget>
               </item>
               <item row="6" column="1">
-               <widget class="QPushButton" name="btn_14">
+               <widget class="QPushButton" name="btn5_2">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -1372,7 +1441,7 @@
                </widget>
               </item>
               <item row="6" column="0">
-               <widget class="QPushButton" name="btn_13">
+               <widget class="QPushButton" name="btn4_2">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -1394,7 +1463,7 @@
                </widget>
               </item>
               <item row="5" column="2">
-               <widget class="QPushButton" name="btn_16">
+               <widget class="QPushButton" name="btn9_2">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -1416,7 +1485,7 @@
                </widget>
               </item>
               <item row="6" column="2">
-               <widget class="QPushButton" name="btn_15">
+               <widget class="QPushButton" name="btn6_2">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -1454,10 +1523,13 @@
                 <property name="text">
                  <string>sqrt(x)</string>
                 </property>
+                <property name="num" stdset="0">
+                 <bool>false</bool>
+                </property>
                </widget>
               </item>
               <item row="5" column="1">
-               <widget class="QPushButton" name="btn_17">
+               <widget class="QPushButton" name="btn8_2">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -1495,6 +1567,9 @@
                 <property name="text">
                  <string>pow(x,2)</string>
                 </property>
+                <property name="num" stdset="0">
+                 <bool>false</bool>
+                </property>
                </widget>
               </item>
               <item row="0" column="2">
@@ -1514,10 +1589,13 @@
                 <property name="text">
                  <string>exp</string>
                 </property>
+                <property name="num" stdset="0">
+                 <bool>false</bool>
+                </property>
                </widget>
               </item>
               <item row="5" column="0">
-               <widget class="QPushButton" name="btn_18">
+               <widget class="QPushButton" name="btn7_2">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -1555,6 +1633,9 @@
                 <property name="text">
                  <string>mod</string>
                 </property>
+                <property name="num" stdset="0">
+                 <bool>false</bool>
+                </property>
                </widget>
               </item>
               <item row="4" column="0">
@@ -1573,6 +1654,9 @@
                 </property>
                 <property name="text">
                  <string>1/x</string>
+                </property>
+                <property name="num" stdset="0">
+                 <bool>false</bool>
                 </property>
                </widget>
               </item>
@@ -1593,6 +1677,9 @@
                 <property name="text">
                  <string>)</string>
                 </property>
+                <property name="num" stdset="0">
+                 <bool>false</bool>
+                </property>
                </widget>
               </item>
               <item row="2" column="3">
@@ -1611,6 +1698,9 @@
                 </property>
                 <property name="text">
                  <string>pi</string>
+                </property>
+                <property name="num" stdset="0">
+                 <bool>false</bool>
                 </property>
                </widget>
               </item>
@@ -1631,6 +1721,9 @@
                 <property name="text">
                  <string>(</string>
                 </property>
+                <property name="num" stdset="0">
+                 <bool>false</bool>
+                </property>
                </widget>
               </item>
               <item row="2" column="0">
@@ -1649,6 +1742,9 @@
                 </property>
                 <property name="text">
                  <string>e</string>
+                </property>
+                <property name="num" stdset="0">
+                 <bool>false</bool>
                 </property>
                </widget>
               </item>
@@ -1669,6 +1765,9 @@
                 <property name="text">
                  <string>log</string>
                 </property>
+                <property name="num" stdset="0">
+                 <bool>false</bool>
+                </property>
                </widget>
               </item>
               <item row="1" column="1">
@@ -1687,6 +1786,9 @@
                 </property>
                 <property name="text">
                  <string>n!</string>
+                </property>
+                <property name="num" stdset="0">
+                 <bool>false</bool>
                 </property>
                </widget>
               </item>
@@ -1707,6 +1809,9 @@
                 <property name="text">
                  <string>abs(x)</string>
                 </property>
+                <property name="num" stdset="0">
+                 <bool>false</bool>
+                </property>
                </widget>
               </item>
               <item row="1" column="3">
@@ -1726,6 +1831,9 @@
                 <property name="text">
                  <string>ln</string>
                 </property>
+                <property name="num" stdset="0">
+                 <bool>false</bool>
+                </property>
                </widget>
               </item>
               <item row="0" column="0">
@@ -1744,6 +1852,9 @@
                 </property>
                 <property name="frame">
                  <bool>true</bool>
+                </property>
+                <property name="num" stdset="0">
+                 <bool>false</bool>
                 </property>
                 <item>
                  <property name="text">
@@ -1792,6 +1903,9 @@
                 </property>
                 <property name="frame">
                  <bool>true</bool>
+                </property>
+                <property name="num" stdset="0">
+                 <bool>false</bool>
                 </property>
                 <item>
                  <property name="text">
