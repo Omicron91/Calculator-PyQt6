@@ -3,6 +3,13 @@ import os
 BASE_DIR = os.getcwd()
 UI_DIR = os.path.join(BASE_DIR, "ui")
 
+NUMBERS = ("0", "1", "2", "3", "4", "5", "6", "7", "8", "9")
+UNARY_OPERATIONS = ("+/-", "%", "1/x", "pow(x,2)", "sqrt(x)")
+BINARY_OPERATIONS = ("+", "-", "X", "/")
+EQ = ("=",)
+DEL_CLEAR = ("C", "DEL")
+DECIMAL_POINT = (".",)
+
 STYLE_SHEET = """
     
     *{
