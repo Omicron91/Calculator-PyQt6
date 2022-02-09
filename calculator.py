@@ -5,7 +5,16 @@ import math
 from PyQt6 import QtCore, QtWidgets, QtGui, uic
 from BlurWindow.blurWindow import blur
 
-from constants import UI_DIR, STYLE_SHEET
+from constants import(
+    UI_DIR,
+    STYLE_SHEET,    
+    NUMBERS,
+    EQ,
+    DECIMAL_POINT,
+    DEL_CLEAR,
+    UNARY_OPERATIONS,
+    BINARY_OPERATIONS,
+)
 
 class Calculator(QtWidgets.QMainWindow):
 
@@ -54,33 +63,17 @@ class Calculator(QtWidgets.QMainWindow):
         self.btnStdCalc.clicked.connect(self.on_btnFromMenu_clicked)
         self.btnSciCalc.clicked.connect(self.on_btnFromMenu_clicked)
 
-        self.btn_0.clicked.connect(self.btnClicked)
-        self.btn_1.clicked.connect(self.btnClicked)
-        self.btn_2.clicked.connect(self.btnClicked)
-        self.btn_3.clicked.connect(self.btnClicked)
-        self.btn_4.clicked.connect(self.btnClicked)
-        self.btn_5.clicked.connect(self.btnClicked)
-        self.btn_6.clicked.connect(self.btnClicked)
-        self.btn_7.clicked.connect(self.btnClicked)
-        self.btn_8.clicked.connect(self.btnClicked)
-        self.btn_9.clicked.connect(self.btnClicked)
-        
-        self.btnPlusMinus.clicked.connect(self.btnClicked)
-        self.btnPercent.clicked.connect(self.btnClicked)
-        self.btnAdd.clicked.connect(self.btnClicked)
-        self.btnSub.clicked.connect(self.btnClicked)
-        self.btnMul.clicked.connect(self.btnClicked)
-        self.btnDiv.clicked.connect(self.btnClicked)
-        self.btnEq.clicked.connect(self.btnClicked)
+        self.grpBtnOperation = []
+        self.grpBtnNumber = []
+        self.grpBtnEq = []
+        self.grpBtnDEL_C = []
+        self.grpBtnDecimalPoint = []
 
-        self.btnOneDivX.clicked.connect(self.btnClicked)
-        self.btnPow.clicked.connect(self.btnClicked)
-        self.btnSqrt.clicked.connect(self.btnClicked)
-        
-        self.btnDel.clicked.connect(self.btnClicked)
-        self.btnDot.clicked.connect(self.btnClicked)
-        self.btnC.clicked.connect(self.btnClicked)
-        
+        self.grpBtnOperationEnabled = True
+
+        self.__groupButtons()
+        self.__connectGroupButtonSignals()
+
         self.btnClose.clicked.connect(self.btnClosePressed)
         self.btnMinimize.clicked.connect(self.btnMinimizePressed)
 
@@ -124,6 +117,46 @@ class Calculator(QtWidgets.QMainWindow):
     def btnMinimizePressed(self):
         self.showMinimized()
 
+    def __groupButtons(self):
+
+        for btn in QtCore.QObject.findChildren(self, QtWidgets.QPushButton):
+            if btn.text() in NUMBERS:
+                self.grpBtnNumber.append(btn)
+            
+            elif(btn.text() in UNARY_OPERATIONS or btn.text() in BINARY_OPERATIONS and
+                    not btn.objectName() in ("btnMinimize", "btnClose")):
+
+                self.grpBtnOperation.append(btn)
+
+            elif btn.text() in EQ:
+                self.grpBtnEq.append(btn)
+
+            elif btn.text() in DEL_CLEAR:
+                self.grpBtnDEL_C.append(btn)
+            
+            elif btn.text() in DECIMAL_POINT:
+                self.grpBtnDecimalPoint.append(btn)
+
+            else:
+                pass
+                
+    def __connectGroupButtonSignals(self):
+
+        for btn in self.grpBtnNumber:
+            btn.clicked.connect(self.on_btn_clicked)
+        
+        for btn in self.grpBtnOperation:
+            btn.clicked.connect(self.on_btn_clicked)
+        
+        for btn in self.grpBtnEq:
+            btn.clicked.connect(self.on_btn_clicked)
+
+        for btn in self.grpBtnDEL_C:
+            btn.clicked.connect(self.on_btn_clicked)
+        
+        for btn in self.grpBtnDecimalPoint:
+            btn.clicked.connect(self.on_btn_clicked)
+
     def animatedMenu(self):
 
         width = self.leftMenuBar.width()
@@ -157,19 +190,23 @@ class Calculator(QtWidgets.QMainWindow):
 
         if "Std" in btn.objectName():
             if currentIdx != 0:
+                self.result = 0
+                self.labelResult.setText("0")
                 self.stackedWidget.setCurrentIndex(0)
         
         elif "Sci" in btn.objectName():
             if currentIdx != 1:
+                self.result = 0
+                self.labelResult.setText("0")
                 self.stackedWidget.setCurrentIndex(1)
 
-    def btnClicked(self):
+    def on_btn_clicked(self):
         
         btn = self.sender()
 
-        numbers = ("0", "1", "2", "3", "4", "5", "6", "7", "8", "9")
-        unaryOp = ("+/-", "%", "1/x", "pow(x,2)", "sqrt(x)")
-        binaryOp = ("+", "-", "X", "/")
+        numbers = NUMBERS
+        unaryOp = UNARY_OPERATIONS
+        binaryOp = BINARY_OPERATIONS
         
         #*** Set Decimal Point ***
         if btn.text() == "." and self.decimalPoint == False:
@@ -177,7 +214,9 @@ class Calculator(QtWidgets.QMainWindow):
             self.decimalPoint = True
 
             if self.clearScreen:
-                
+                if not self.grpBtnOperationEnabled:
+                    self.setOperationEnabled(state=True)
+
                 self.clearScreen = False
                 self.labelResult.setText("0" + btn.text())
 
@@ -188,6 +227,8 @@ class Calculator(QtWidgets.QMainWindow):
         if btn.text() in numbers:
 
             if self.clearScreen:
+                if not self.grpBtnOperationEnabled:
+                    self.setOperationEnabled(state=True)
 
                 self.labelResult.setText("0")
                 self.clearScreen = False
@@ -207,11 +248,23 @@ class Calculator(QtWidgets.QMainWindow):
             self.binaryOperation(btn.text())
         
         elif btn.text() == "=":
+
+            if self.clearScreen:
+                
+                if not self.grpBtnOperationEnabled:
+                    self.setOperationEnabled(state=True)
+
+                self.labelResult.setText("0")
+                self.clearScreen = False
+            
             self.getResult()
 
         else:
             
             if self.clearScreen:
+                
+                if not self.grpBtnOperationEnabled:
+                    self.setOperationEnabled(state=True)
 
                 self.labelResult.setText("0")
                 self.clearScreen = False
@@ -221,157 +274,148 @@ class Calculator(QtWidgets.QMainWindow):
         self.textChanged.emit() #Check if label has a decimal point
 
     def unaryOperation(self, op):
+
+        if op == "+/-":
+            
+            if self.labelResult.text() != "0":
+
+                value = float(self.labelResult.text())
+                value *= -1
+
+                self.labelResult.setText(format(value, ".15g"))
+
+        elif op == "%":
+            
+                if self.labelResult.text() != "0":
+
+                    value = float(self.labelResult.text())
+                    value *= 0.01
+
+                    self.labelResult.setText(format(value, ".15g"))
+
+        elif op == "pow(x,2)":
+
+            if self.labelResult.text() != "0":
+
+                value = float(self.labelResult.text())
+                value = math.pow(value, 2)
+
+                self.labelResult.setText(format(value, ".15g"))
+
+        elif op == "sqrt(x)":
+
+            if self.labelResult.text() != "0":
+
+                value = float(self.labelResult.text())
+                value = math.sqrt(value)
+
+                self.labelResult.setText(format(value, ".15g"))
+
+        else:
+
+            try:
+                value = float(self.labelResult.text())
+                value = 1/value
+                self.labelResult.setText(format(value, ".15g"))
+
+            except ZeroDivisionError:
+                self.labelResult.setText("Can't Divide by Zero!")
+                self.setOperationEnabled(state=False)
+                self.clearScreen = True
+                self.result = 0
+                return
         
-        try:
-
-            if op == "+/-":
-                
-                if self.labelResult.text() != "0":
-
-                    value = float(self.labelResult.text())
-                    value *= -1
-
-                    self.labelResult.setText(format(value, ".15g"))
-
-            elif op == "%":
-                
-                    if self.labelResult.text() != "0":
-
-                        value = float(self.labelResult.text())
-                        value *= 0.01
-
-                        self.labelResult.setText(format(value, ".15g"))
-
-                        if not self.clearScreen:
-                            self.clearScreen = True
-
-            elif op == "pow(x,2)":
-
-                if self.labelResult.text() != "0":
-
-                    value = float(self.labelResult.text())
-                    value = math.pow(value, 2)
-
-                    self.labelResult.setText(format(value, ".15g"))
-
-            elif op == "sqrt(x)":
-
-                if self.labelResult.text() != "0":
-
-                    value = float(self.labelResult.text())
-                    value = math.sqrt(value)
-
-                    self.labelResult.setText(format(value, ".15g"))
-
-            else:
-
-                if self.labelResult.text() != "0":
-
-                    value = float(self.labelResult.text())
-                    value = 1/value
-
-                    self.labelResult.setText(format(value, ".15g"))
-
-                else:
-
-                    self.labelResult.setText("Can't Divide by Zero!")
-                    self.clearScreen = True
-                    self.result = 0
-        
-        except ValueError:
-            pass
-
+        self.clearScreen = True
+            
     def binaryOperation(self, op):
 
         #*** Binary Operations ***
-
-        try:
-
-            if op == "+":
-                
-                self.prevOperation = "add"
-                self.result += float(self.labelResult.text())
-                self.labelResult.setText("0")
-            
-            elif op == "-":
-                
-                self.prevOperation = "sub"
-                self.result += float(self.labelResult.text())
-                self.labelResult.setText("0")
-            
-            elif op == "X" :
-
-                self.prevOperation = "mul"
-                self.result += float(self.labelResult.text())
-                self.labelResult.setText("0")
-
-            else:
-
-                self.prevOperation = "div"
-                self.result += float(self.labelResult.text())
-                self.labelResult.setText("0")
         
-        except ValueError:
-            pass
+        if op == "+":
+            
+            self.prevOperation = "add"
+            self.result += float(self.labelResult.text())
+            self.labelResult.setText("0")
+        
+        elif op == "-":
+            
+            self.prevOperation = "sub"
+            self.result += float(self.labelResult.text())
+            self.labelResult.setText("0")
+        
+        elif op == "X" :
+
+            self.prevOperation = "mul"
+            self.result += float(self.labelResult.text())
+            self.labelResult.setText("0")
+
+        else:
+
+            self.prevOperation = "div"
+            self.result += float(self.labelResult.text())
+            self.labelResult.setText("0")
     
     def getResult(self):
         
-        try:
+        if self.prevOperation != "":
 
-            if self.prevOperation != "":
+            if self.prevOperation == "add":
+                self.result += float(self.labelResult.text())
 
-                if self.prevOperation == "add":
-                    self.result += float(self.labelResult.text())
+            elif self.prevOperation == "sub":
+                self.result -= float(self.labelResult.text())
+            
+            elif self.prevOperation == "mul":
+                self.result *= float(self.labelResult.text())
 
-                elif self.prevOperation == "sub":
-                    self.result -= float(self.labelResult.text())
+            else:
                 
-                elif self.prevOperation == "mul":
-                    self.result *= float(self.labelResult.text())
+                try:
+                    self.result /= float(self.labelResult.text())
 
-                else:
+                except ZeroDivisionError:
+                    
+                    self.labelResult.setText("Can't Divide by Zero!")
+                    self.setOperationEnabled(state=False)
+                    self.prevOperation = ""
+                    self.clearScreen = True
+                    self.result = 0
+                    return
+                    
+            self.labelResult.setText(format(self.result, ".15g"))
+            self.clearScreen = True
+            self.result = 0
 
-                    if self.labelResult.text() != "0":
-                        self.result /= float(self.labelResult.text())
-                                            
-                    else:
-                        self.result = "Can't Divide by Zero!"
-
-                if isinstance(self.result, str):   #Check if result has a number or a message
-
-                    self.labelResult.setText(self.result)
-
-                else:
-
-                    self.labelResult.setText(format(self.result, ".15g"))
-                
-                self.clearScreen = True
-                self.result = 0
-                self.prevOperation = ""
-
-        except ValueError:
+    def setOperationEnabled(self, state):
+        
+        if state is False and self.grpBtnOperationEnabled:
+            self.grpBtnOperationEnabled = state
+        
+        elif state is True and not self.grpBtnOperationEnabled:
+            self.grpBtnOperationEnabled = state
+        
+        else:
             pass
 
-    def clearDelete(self, op):
+        for btn in self.grpBtnOperation:
+            btn.setEnabled(state)
 
+    def clearDelete(self, op):
+        
+        if not self.grpBtnOperationEnabled:
+                    self.setOperationEnabled(state=True)
+                    
         if op != ".":
 
             if op == "DEL":
 
-                if self.labelResult.text() != "Can't Divide by Zero!":
-
-                    if self.labelResult.text() != "" and self.labelResult.text() != "0" and len(self.labelResult.text()) != 1:
-                        
-                        self.labelResult.setText(
-                            self.labelResult.text()[:len(self.labelResult.text()) - 1])
-
-                    else:
-                        
-                        self.result = 0
-                        self.labelResult.setText("0")
+                if self.labelResult.text() != "" and self.labelResult.text() != "0" and len(self.labelResult.text()) != 1:
                     
-                else:
+                    self.labelResult.setText(
+                        self.labelResult.text()[:len(self.labelResult.text()) - 1])
 
+                else:
+                    
                     self.result = 0
                     self.labelResult.setText("0")
 
@@ -381,9 +425,7 @@ class Calculator(QtWidgets.QMainWindow):
                 self.labelResult.setText("0")
 
             else:
-                
-                self.result = 0
-                self.labelResult.setText("0")
+                pass
 
     @QtCore.pyqtSlot()
     def checkLabel(self):
