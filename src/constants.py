@@ -40,7 +40,7 @@ STYLE_SHEET = """
         font-weight: bold;
     }
 
-    QLabel#labelResult
+    QLineEdit#lineEditResult
     {
         font-size: 28pt;
         font-weight: bold;
@@ -53,12 +53,18 @@ STYLE_SHEET = """
         text-align: left;
     }
 
-    QPushButton[num]
+    QPushButton[num="true"]
     {
-        background-color: rgba(20, 20, 20, 255);
+        background-color: rgba(64, 64, 64, 255);
         color: rgba(255, 255, 255, 255);
         font-size: 12pt;
         font-weight: bold;
+    }
+    QPushButton[num="false"]
+    {
+        background-color: rgba(20, 20, 20, 255);
+        color: rgba(255, 255, 255, 255);
+        font-size: 10pt;
     }
 
     QPushButton[eq]
@@ -72,12 +78,36 @@ STYLE_SHEET = """
     QPushButton#btnClose
     {
         background-color: rgba(255, 0, 0, 0);
-        color: rgb(255, 255, 255);
+        color: rgba(255, 255, 255, 255);
+    }
+
+    QPushButton#btnClose:hover
+    {
+        background-color: rgba(255, 0, 0, 255);
+        color: rgba(255, 255, 255, 255);
+    }
+
+    QPushButton#btnClose:pressed
+    {
+        background-color: rgba(255, 0, 0, 200);
+        color: rgba(255, 255, 255, 200);
     }
 
     QPushButton#btnMinimize
     {
-        background-color: rgba(25, 25, 25, 0);
+        background-color: rgba(40, 40, 40, 0);
+        color: rgb(255, 255, 255);
+    }
+
+    QPushButton#btnMinimize:hover
+    {
+        background-color: rgba(40, 40, 40, 255);
+        color: rgb(255, 255, 255);
+    }
+
+    QPushButton#btnMinimize:pressed
+    {
+        background-color: rgba(40, 40, 40, 200);
         color: rgb(255, 255, 255);
     }
 
